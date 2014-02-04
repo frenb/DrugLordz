@@ -1,4 +1,5 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/jquery.colorbox-min.js"></script>
 <script>
 var score = 0;
 var money = 100;
@@ -6,8 +7,17 @@ var drugInventory = {
 	"marijuana":0,
 	"cocaine":0,
 	"heroine":0,
-	"acid":0
+	"acid":0,
+	"add":function(drugName,amount)
+	{
+		this[drugName]+=amount
+	},
+	"remove":function(drugName,amount)
+	{
+		this[drugName]-=amount
+	}
 }
+
 var drugs = ["marijuana","cocaine","heroine","acid"];
 var prices = {
 	"marijuana":20,
@@ -56,7 +66,7 @@ var eventHandlers = {
 			updateAlerts("you don't have enough inventory to support the sale of " + drugAmountRequested + " ounces of " + drugBought);
 		}
 		else if(confirm("Sell " + drugAmountRequested + " ounces of " + drugBought)){
-			drugInventory[drugBought]=drugInventory[drugBought]-parseInt(drugAmountRequested);
+			drugInventory["remove"](drugBought,parseInt(drugAmountRequested));
 			money+=prices[drugBought]*parseInt(drugAmountRequested);
 		}
 		else
@@ -78,12 +88,12 @@ var eventHandlers = {
 			{
 				var quantity = parseInt(prompt("How much would you like to buy"));
 				var purchaseAmount = parseInt(quantity) * wholesale_prices[drug];
-				alert(drug + " " + purchaseAmount + " " + money + " " +  parseInt(quantity) + " " + wholesale_prices[drug]);
+				
 				if(purchaseAmount <= money)
 				{
 					updateAlerts("you successfully purchased the drugs");
 					money -= purchaseAmount;
-					drugInventory[drug]=parseInt(drugInventory[drug])+parseInt(quantity);
+					drugInventory["add"](drug,parseInt(quantity));
 				}
 				else
 				{
@@ -107,10 +117,9 @@ var eventHandlers = {
 var inventoryDisplay = function()
 {
 	var display;
-	display = drugs[0] + ":" + drugInventory[drugs[0]];
-	for(var i=1;i<drugs.length;i++)
+	for(var i=0;i<drugs.length;i++)
 	{
-		display+=","+drugs[i] + ":" + drugInventory[drugs[i]];
+		$("#"+drugs[i]).text(drugInventory[drugs[i]]);
 	}
 	return display;
 }
@@ -124,13 +133,13 @@ var gameLoop = function()
 		var myEvent = getRandomEntry(events);
 		eventHandlers[myEvent]();
 		$("#money").text("money: " + money);	
-		$("#inventory").text(inventoryDisplay);	
+		$("#inventory").text(inventoryDisplay());	
 		//setTimeout(eventTiming);
 
 }
-
-$(document).load(function(){
-	gameLoop();	
+var $form;
+$(document).ready(function(){
+	gameLoop();
 })
 
 var currentMenuId;
@@ -138,11 +147,15 @@ var currentMenuId;
 var toggleMenu = function(id)
 {
 	
-	if(currentMenuId!=id)
+	/*if(currentMenuId!=id)
+	{
 		$("#"+currentMenuId).toggleClass("showPopUp hidePopUp");
+	}
 	else
 		$("#"+id).toggleClass("showPopUp hidePopUp");	
-	
+	*/
+	//alert($form);
+	$.colorbox({html:$("#"+id).html()});
 	currentMenuId=id;
 }
 
@@ -181,6 +194,21 @@ var previousEvents=[];
 <div id="events">
 </div>
 <div id="inventory" class="hidePopUp">
+	<table>
+		<tr>
+			<td>Marijuana</td><td><span id="marijuana"></span></td>
+		</tr>
+		<tr>
+			<td>Cocaine</td><td><span id="cocaine"></span></td>
+		</tr>
+		<tr>
+			<td>Heroine</td><td><span id="heroine"></span></td>
+		</tr>
+		<tr>
+			<td>Acid</td><td><span id="acid"></span></td>
+		</tr>
+
+	</table>
 </div>
 <button onclick="gameLoop()">Next event</button>
 </body>
