@@ -1,0 +1,92 @@
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery.colorbox-min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/jquery.mobile-1.4.0.min.js"></script>
+<script src="js/main.js"></script>
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/jquery.mobile-1.4.0.css">
+<style>
+	.hidePopUp{
+		display:none;
+	}
+	
+	.showPopUp{1
+		display:;
+	}
+
+	.drug_button{
+		background-color:blue;
+		width:100px;
+		height:30px;
+	}
+
+	#wholesale_buy{
+		background-color: white;
+		width:240px;
+		height:100%;
+		z-index: -1; 
+		position:relative;
+	}
+
+	#inventory{
+		background-color: white;
+		width:240px;
+		height:100%;
+		z-index: -1; 
+		position:relative;
+	}
+
+</style>
+<html>
+<body>
+
+<navigation>
+<a id="inventory_button" href="inventory.htm" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Inventory</a>
+</navigation>
+
+<div data-dialog="wholesale_buy_dialog" id="wholesale_buy_dialog" class="hidePopUp">
+	<div>
+	<table>
+		<tr>
+			<td><button data-drug="cocaine" class="drug_button" id="cocaine_button">Cocaine</button></td>
+		</tr>
+
+		<tr>
+			<td><button data-drug="marijuana" class="drug_button" id="marijuana_button">Marijuana</button></td>
+		</tr>
+		
+		<tr>
+			<td><button data-drug="heroine" class="drug_button" id="heroine_button">Heroine</button></td>
+		</tr>
+		<tr>
+			<td><button data-drug="acid" class="drug_button" id="acid_button">Acid</button></td>
+		</tr>
+	</table>
+	</div>
+</div>
+<div data-dialog="purchase_dialog" id="purchase_dialog" class="hidePopUp">
+	<span id="purchase_text">How much <span id="purchase_drug_name"></span> would like to purchase?</span><br>
+	<input type="text" id="purchase_amount" name="purchase_amount"><br>
+</div>
+<div data-dialog="drug_found_dialog" id="drug_found_dialog" class="hidePopUp">
+	<span>You found <span id="drug_found_amount">0</span> ounces of <span id="drug_found_name">X</span></span>
+</div>
+<div data-dialog="drug_sold_dialog" id="drug_sold_dialog" class="hidePopUp">
+	<span>A junkie just bought <span id="drug_sold_amount"></span> ounces of <span id="drug_sold_name"></span> from you</span>
+</div>
+<div data-dialog="drug_spike_dialog" id="drug_spike_dialog" class="hidePopUp">
+	<img src="img/junky.png"></img><br>
+	<span>Junkies are going crazy for <span id="drug_spike_name"></span></span>
+</div>
+<div id="money">
+</div><br>
+<div id="alerts">
+</div>
+<div id="events">
+</div>
+
+<button id="continueButton" data-button="continue">Continue</button>
+
+</body>
+</html>
+

@@ -1,0 +1,28 @@
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+$(document).ready(function(){
+	$("#drugButton").click(wholesale_drug_buy);
+});
+</script>
+<div id="drug_found_dialog"></div>
+<div id="wholesale_buy_dialog"></div>
+<div id="drug_spike_dialog"></div>
+<div data-dialog="wholesale_buy" id="wholesale_buy" class="hidePopUp">
+	<div id="content">
+	<table>
+		<tr>
+			<td><button data-drug="marijuana" id="drugButton">Marijuana</button></td>
+		</tr>
+		<tr>
+			<td><button data-drug="cocaine" id="drugButton">Cocaine</button></td>
+		</tr>
+		<tr>
+			<td><button data-drug="heroine" id="drugButton">Heroine</button></td>
+		</tr>
+		<tr>
+			<td><button data-drug="acid" id="drugButton">Acid</button></td>
+		</tr>
+	</table>
+   </div>
+</div>

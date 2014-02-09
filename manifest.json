@@ -1,0 +1,16 @@
+{
+  "name": "Drug Lordz",
+  "description": "Next generation Drug War",
+  "version": "0.1",
+  "permissions": ["http://*/"],
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    },
+    "sandbox": {
+  		"pages": ["window.html","inventory.htm"]
+	}
+	
+},
+  "icons": { "16": "img/DL-64.png", "128": "img/DL-128.png" }
+}
